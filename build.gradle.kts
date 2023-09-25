@@ -21,16 +21,8 @@ kotlin {
     }
     js {
         browser {
-            testTask {
-                useKarma {
-                    useFirefox()
-                }
-            }
-            commonWebpackConfig {
-                cssSupport {
-                    enabled.set(true)
-                }
-            }
+            testTask(Action { useKarma { useFirefox() } })
+            commonWebpackConfig(Action { cssSupport { enabled.set(true) } })
         }
     }
     val hostOs = System.getProperty("os.name")
@@ -45,7 +37,7 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
-    
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
